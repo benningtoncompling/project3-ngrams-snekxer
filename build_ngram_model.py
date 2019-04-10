@@ -22,12 +22,8 @@ You will count as if the sentence is written:
 import sys
 import math
 
-#input = sys.argv[1]
-#output = sys.argv[2]
-
-input = "C:\\Users\\Paulina\\Documents\\GitHub\\Project 3\\InputTexts\\dickens_training.txt"
-#input = "first_100_sentences_dickens_training.txt"
-output = "out.txt"
+input = sys.argv[1]
+output = sys.argv[2]
 
 file = open(input, 'r', encoding='UTF-8').read().split("\n")
 
