@@ -22,19 +22,21 @@ You will count as if the sentence is written:
 import sys
 import math
 
-input = sys.argv[1]
-output = sys.argv[2]
+input = "C:\\Users\\Paulina\\Documents\\GitHub\\Project 3\\InputTexts\\dickens_training.txt" #sys.argv[1]
+output = "dickens_model.txt" #sys.argv[2]
 
-file = open(input, 'r', encoding='UTF-8').read().split("\n")
+file = open(input, 'r', encoding='UTF-8').read().splitlines()
 
 words_count = 0
 
+#lowercase and beginning/end of sentence
 mod_file = ['<s> ' + line.lower() + ' </s>' for line in file]
 
 unigrams = []
 bigrams = []
 trigrams = []
 
+#splits words in each line and formats them into uni/bi/trigrams by using relative position
 for line in mod_file:
     i = 0
     split_line = line.split(" ")
@@ -47,13 +49,15 @@ for line in mod_file:
             trigrams.append((word, split_line[i+1], split_line[i+2]))
         i += 1
 
+#Makes dictionary of uni/bi/trigrams, sorts them, and makes dictionary of the sorted elements.
+#Will helped me with the ngram loop for the dictionary after my beautiful one liner failed :(
 uni_count = {}
-#uni_count = {i: unigrams.count(i) for i in unigrams}
 for unigram in unigrams:
     if unigram in uni_count:
         uni_count[unigram] += 1
     else:
         uni_count[unigram] = 1
+#uni_count = {i: unigrams.count(i) for i in unigrams}
 uni_keys = sorted(sorted(uni_count.keys()), key=lambda x: uni_count[x], reverse=True)
 uni_ordered = {}
 [uni_ordered.update({word: uni_count[word]}) for word in uni_keys]
@@ -71,7 +75,7 @@ bi_ordered = {}
 [bi_ordered.update({word: bi_count[word]}) for word in bi_keys]
 
 tri_count = {}
-for trigram in bigrams:
+for trigram in trigrams:
     if trigram in tri_count:
         tri_count[trigram] += 1
     else:
@@ -111,7 +115,7 @@ n-gram
 Do not use smoothing for this! Only include n-grams that exist in the training text.
 """
 
-with open(output, "w") as output:
+with open(output, "w", encoding='UTF-8') as output:
     output.write(
         "\\data\\\n" +
         "ngram 1: types=" + str(len(uni_ordered.keys())) + " tokens=" + str(sum(uni_ordered.values())) + "\n" +
@@ -129,12 +133,12 @@ with open(output, "w") as output:
     for key, value in bi_ordered.items():
         prob = value / uni_ordered[key[0]]
         log = math.log10(prob)
-        output.write(str(value) + " " + str(prob) + " " + str(log) + " " + str(key) + "\n")
+        output.write(str(value) + " " + str(prob) + " " + str(log) + " " + str(key[0] + " " + key[1]) + "\n")
 
     output.write("\n \\3-gram: \n")
     for key, value in tri_ordered.items():
         prob = value / bi_ordered[(key[0], key[1])]
         log = math.log10(prob)
-        output.write(str(value) + " " + str(prob) + " " + str(log) + " " + str(key) + "\n")
+        output.write(str(value) + " " + str(prob) + " " + str(log) + " " + str(key[0] + " " + key[1] + " " + key[2]) + "\n")
 
     output.close()
