@@ -10,3 +10,7 @@ I spent about 4h trying to do the bigram generator because I misunderstood the c
 I had to toy around with the punctuation signs indicator, as it would give false positives or not generate sentences.
 The trigram generator can get into a weird loop of ' " after' ad infinitum, just as the sentences tend to start with
 " -out what youthful; youths offered". In general, trigram and bigram generators are more accurate, but also require more tuning I think.
+Sentences generated from bigrams make more sense than the ones from trigrams.
+
+Part III:
+

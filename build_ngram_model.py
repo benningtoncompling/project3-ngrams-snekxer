@@ -22,8 +22,11 @@ You will count as if the sentence is written:
 import sys
 import math
 
-input = "C:\\Users\\Paulina\\Documents\\GitHub\\Project 3\\InputTexts\\dickens_training.txt" #sys.argv[1]
-output = "dickens_model.txt" #sys.argv[2]
+input = sys.argv[1]
+output = sys.argv[2]
+
+#input = "dickens_training.txt"
+#output = "dickens_model.txt"
 
 file = open(input, 'r', encoding='UTF-8').read().splitlines()
 

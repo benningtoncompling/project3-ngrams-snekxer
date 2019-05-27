@@ -13,11 +13,11 @@ You will need to import random for this script.
 import sys
 import random
 
-#input = sys.argv[1]
-#output = sys.argv[2]
+input = sys.argv[1]
+output = sys.argv[2]
 
-input = "dickens_model.txt"
-output = "generated_sentences.txt"
+#input = "dickens_model.txt"
+#output = "generated_sentences.txt"
 
 ngram_model = open(input, 'r', encoding='UTF-8').read()
 random.seed()
@@ -55,10 +55,6 @@ def select_word(pos, model, rand_num, sentence):
             break
         if sentence[len(sentence) - 1] == '</s>':
             break
-       # if sentence[len(sentence) - 1] in punctuation_signs:
-       #     sentence.append('</s>')
-       #     added_word = True
-       #     break
     print("    new sentence: " + str(sentence))
     if not added_word:
         print("sentences are equal")
