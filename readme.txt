@@ -13,4 +13,8 @@ The trigram generator can get into a weird loop of ' " after' ad infinitum, just
 Sentences generated from bigrams make more sense than the ones from trigrams.
 
 Part III:
+Once the algorithm for perplexity was clear, implementing it was easier. It was a bit tricky seeing where the mapping had gone wrong when I got some issues with the dictionaries,
+the source problem being the formatting of the model; I was using an incomplete version, and once the complete one was uploaded, it performed seamlessly (note that this is based on the
+model I created, meaning that words in the n-grams are separated only by spaces and dont have the tuple structure in them). I preferred to append to the file
+instead of rewriting because it allows for easy comparision between the results.
 
